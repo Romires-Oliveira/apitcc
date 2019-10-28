@@ -5,34 +5,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.servprod.apptcc.models.UsuarioComum;
-import com.servprod.apptcc.service.UsuarioComumService;
+import com.servprod.apptcc.models.AvaliacaoSP;
+import com.servprod.apptcc.service.AvaliacaoSPService;
 
 @RestController
-@RequestMapping("api/usuariocomum")
-public class UsuarioComumController {
+@RequestMapping("api/avaliacaoSP")
+public class AvaliacaoSPController {
 
     @Autowired
-    private UsuarioComumService service;
+    private AvaliacaoSPService service;
 
     @PostMapping("/salvar")
-    public void salvar(@RequestBody UsuarioComum usuarioComum){
-        service.salvar(usuarioComum);
+    public void salvar(@RequestBody AvaliacaoSP avaliacaoSP){
+        service.salvar(avaliacaoSP);
     }
 
     @GetMapping
-    public List<UsuarioComum> listar(){
+    public List<AvaliacaoSP> listar(){
         return service.listar();
     }
 
     @GetMapping("/{id}")
-    public UsuarioComum ListarPorId(@PathVariable("id") Long id){
+    public AvaliacaoSP ListarPorId(@PathVariable("id") Long id){
         return service.listarPorId(id);
     }
 
     @PutMapping("/editar")
-    public void editar(@RequestBody UsuarioComum usuarioComum){
-        service.salvar(usuarioComum);
+    public void editar(@RequestBody AvaliacaoSP avaliacaoSP){
+        service.salvar(avaliacaoSP);
     }
 
     @DeleteMapping("/deletar/{id}")

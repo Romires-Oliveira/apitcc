@@ -1,6 +1,7 @@
 package com.servprod.apptcc.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,10 +15,14 @@ public class UsuarioComum extends Generico{
 	private String nomeCompleto;
     private String nomeUsuario;
     private String sexo;
+    private String email;
+    private String senha;
+    private String confirmarSenha;
+    private String tipoUsuario;
 
-    //@OneToOne
-    //private Login idLogin;
-
+    @OneToOne
+    private Prestador prestador;
+    
     public String getNomeCompleto() {
         return nomeCompleto;
     }
@@ -42,14 +47,44 @@ public class UsuarioComum extends Generico{
         this.sexo = sexo;
     }
 
-    /*
-    public Login getIdLogin() {
-        return idLogin;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setIdLogin(Login idLogin) {
-        this.idLogin = idLogin;
-    }
-    */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public Prestador getPrestador() {
+		return prestador;
+	}
+
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
+	}
 
 }
