@@ -29,4 +29,8 @@ public class UsuarioComumService {
         repository.deleteById(id);
     }	
 
+    public void listarPorEmail (String email) {
+    	repository.findByEmail(email);
+    }
+    
 }

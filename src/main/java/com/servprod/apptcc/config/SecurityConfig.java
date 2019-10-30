@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.servprod.apptcc.security.JWTAuthenticationFilter;
+import com.servprod.apptcc.security.JWTAuthorizationFilter;
 import com.servprod.apptcc.security.JWTUtil;
 
 @Configuration
@@ -36,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "/api/pessoafisica/**",
 	        "/api/endereco/**",
 	        "/api/categoriasp/**",
-	        "/api/avaliacaoSP/**"
+	        "/api/avaliacaoSP/**",
+	        "/login"
 	};
 	
     private static final String[] PUBLIC_MATCHERS_POST = {
@@ -47,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "/api/pessoafisica/**",
 	        "/api/endereco/**",
 	        "/api/categoriasp/**",
-	        "/api/avaliacaoSP/**"
+	        "/api/avaliacaoSP/**",
+	        "/login"
 //            "/auth/forgot/**"
     };
 	
@@ -60,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
-//        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 	

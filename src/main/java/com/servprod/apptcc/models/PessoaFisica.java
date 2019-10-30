@@ -10,25 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "pessoafisica")
 public class PessoaFisica extends Generico{
 
-    private String nomeComplete;
-    private String nomeUsuario;
     private String CPF;
-
-    public String getNomeComplete() {
-        return nomeComplete;
-    }
-
-    public void setNomeComplete(String nomeComplete) {
-        this.nomeComplete = nomeComplete;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
 
     public String getCPF() {
         return CPF;

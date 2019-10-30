@@ -28,6 +28,6 @@ public class PrestadorService {
 
     public void excluir(Long id){
         repository.deleteById(id);
-    }	
-
+    }
+    
 }
