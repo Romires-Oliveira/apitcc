@@ -22,8 +22,8 @@ public class Endereco extends Generico{
     private String bairro;
     private String complemento;
     
-    @OneToMany
-    private List<Prestador> prestador;
+    @ManyToOne
+    private UsuarioComum usuarioComum;
     
     public String getCep() {
         return cep;

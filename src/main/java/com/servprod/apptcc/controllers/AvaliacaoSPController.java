@@ -9,7 +9,7 @@ import com.servprod.apptcc.models.AvaliacaoSP;
 import com.servprod.apptcc.service.AvaliacaoSPService;
 
 @RestController
-@RequestMapping("api/avaliacaoSP")
+@RequestMapping("api/avaliacaosp")
 public class AvaliacaoSPController {
 
     @Autowired

@@ -11,24 +11,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "prestador")
 public class Prestador extends Generico{
 
-    @OneToOne
-    private PessoaFisica tipoPessoaFisica;
-    @OneToOne
-    private PessoaJuridica tipoPessoaJuridica;
+    private String CPF;
 
-	public PessoaFisica getTipoPessoaFisica() {
-		return tipoPessoaFisica;
-	}
+    public String getCPF() {
+        return CPF;
+    }
 
-	public void setTipoPessoaFisica(PessoaFisica tipoPessoaFisica) {
-		this.tipoPessoaFisica = tipoPessoaFisica;
-	}
-
-	public PessoaJuridica getTipoPessoaJuridica() {
-		return tipoPessoaJuridica;
-	}
-
-	public void setTipoPessoaJuridica(PessoaJuridica tipoPessoaJuridica) {
-		this.tipoPessoaJuridica = tipoPessoaJuridica;
-	}	
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
 }

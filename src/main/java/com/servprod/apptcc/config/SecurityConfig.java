@@ -18,6 +18,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.servprod.apptcc.security.JWTAuthenticationFilter;
 import com.servprod.apptcc.security.JWTAuthorizationFilter;
 import com.servprod.apptcc.security.JWTUtil;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -30,18 +31,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private JWTUtil jwtUtil;
 
 	private static final String[] PUBLIC_MATCHERS = {
-	        "/api/usuariocomum/**",
-	        "/api/servprod/**",
-	        "api/prestador/**",
-	        "/api/pessoajuridica/**",
-	        "/api/pessoafisica/**",
-	        "/api/endereco/**",
-	        "/api/categoriasp/**",
-	        "/api/avaliacaoSP/**",
-	        "/login"
+	        //"/api/usuariocomum/**",
+	        //"/api/servprod/**",
+	        //"api/prestador/**",
+	        //"/api/pessoajuridica/**",
+	        //"/api/pessoafisica/**",
+	        //"/api/endereco/**",
+	        //"/api/categoriasp/**",
+	        //"/api/avaliacaoSP/**",
+	        //"/login/**",
+	        //"/auth/forgot/**"
 	};
 	
     private static final String[] PUBLIC_MATCHERS_POST = {
+	        //"/api/usuariocomum/**",
+	        //"/api/servprod/**",
+	        //"api/prestador/**",
+	        //"/api/pessoajuridica/**",
+	        //"/api/pessoafisica/**",
+	        //"/api/endereco/**",
+	        ///"/api/categoriasp/**",
+	        //"/api/avaliacaoSP/**",
+	        //"/login/**",
+                "/auth/forgot/**"
+    };
+    
+    /**private static final String[] PUBLIC_MATCHERS_PUT = {
 	        "/api/usuariocomum/**",
 	        "/api/servprod/**",
 	        "api/prestador/**",
@@ -50,15 +65,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        "/api/endereco/**",
 	        "/api/categoriasp/**",
 	        "/api/avaliacaoSP/**",
-	        "/login"
-//            "/auth/forgot/**"
-    };
+	        "/login",
+                "/auth/forgot/**"
+    };*/
 	
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.authorizeRequests()
+        	//.antMatchers(HttpMethod.PUT, PUBLIC_MATCHERS_PUT).permitAll()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
@@ -74,11 +90,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-//        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+        CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-//      source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
     

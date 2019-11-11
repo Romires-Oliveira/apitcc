@@ -20,7 +20,7 @@ public class UsuarioComumController {
         service.salvar(usuarioComum);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<UsuarioComum> listar(){
         return service.listar();
     }

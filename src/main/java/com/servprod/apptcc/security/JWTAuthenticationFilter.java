@@ -16,6 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.servprod.apptcc.dto.CredenciaisDTO;
+import java.util.Date;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
@@ -24,7 +26,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private JWTUtil jwtUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-        //setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
+        setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
@@ -49,6 +51,26 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((UserSS) auth.getPrincipal()).getUsername();
         String token = jwtUtil.generateToken(username);
         res.addHeader("Authorization", "Bearer " + token);
-        //res.addHeader("access-control-expose-headers", "Authorization");
+        res.addHeader("access-control-expose-headers", "Authorization");
+    }
+    
+        private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
+        @Override
+        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+                throws IOException, ServletException {
+            response.setStatus(401);
+            response.setContentType("application/json");
+            response.getWriter().append(json());
+        }
+
+        private String json() {
+            long date = new Date().getTime();
+            return "{\"timestamp\": " + date + ", "
+                    + "\"status\": 401, "
+                    + "\"error\": \"Não autorizado\", "
+                    + "\"message\": \"Email ou senha inválidos ou sem permissão\", "
+                    + "\"path\": \"/login\"}";
+        }
     }
 }
